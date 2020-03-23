@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('gallery/list','GalleryController@viewGalleryList');
+Route::post('gallery/save','GalleryController@saveGallery');
+Route::get('gallery/view/{id}','GalleryController@viewGalleryPics');
+Route::post('image/do-upload','GalleryController@doImageUpload');
+
