@@ -14,7 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('users.login');
+});
+
+Route::post('user/do-login', 'Auth\AuthController@doLogin');
+
+Route::get('user/logout', function(){
+    Auth::logout();
+    return redirect('/');
 });
 
 Route::get('gallery/list','GalleryController@viewGalleryList');

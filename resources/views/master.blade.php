@@ -18,6 +18,13 @@
 </head>
 <body>
     <div class="container">
+        @if (Session::has('flash_massage'))
+            <div class="alert alert-success" role="alert">{{Session::get('flash_massage')}}</div>
+        @endif
+        @if (Session::has('flash_error'))
+            <div class="alert alert-danger" role="alert">{{Session::get('flash_error')}}</div>
+        @endif
+
         @yield('content')
     </div>
 

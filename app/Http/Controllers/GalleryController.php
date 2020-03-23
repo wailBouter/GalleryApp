@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class GalleryController extends Controller
@@ -31,7 +32,7 @@ class GalleryController extends Controller
         $gallery = new Gallery;
         //save the new gallery
         $gallery->name = $request->input('gallery_name');
-        $gallery->created_by= 1;
+        $gallery->created_by= Auth::user()->id;
         $gallery->published = 1;
         $gallery->save();
 
