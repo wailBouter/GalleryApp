@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('users.login');
-});
+})->name('login');;
 
 Route::post('user/do-login', 'Auth\AuthController@doLogin');
 

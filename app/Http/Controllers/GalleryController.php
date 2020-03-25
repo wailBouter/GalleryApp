@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class GalleryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function viewGalleryList()
     {
         $galleries = Gallery::all();
