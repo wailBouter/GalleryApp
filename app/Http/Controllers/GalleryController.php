@@ -78,4 +78,23 @@ class GalleryController extends Controller
             ]);
         return $image;
     }
+
+    public function deleteGallery($id)
+    {
+        $currentGallery = Gallery::findOrFail($id);
+        
+        if($currentGallery->created_by!= Auth::user()->id){
+            abort('403', 'You are not allowed to delete this gallery!');
+        }
+
+        foreach ($currentGallery->images as $image) {
+            unlink(public_path($image->file_path));
+        }
+        
+        $currentGallery->images()->delete();
+
+        $currentGallery->delete();
+
+        return redirect()->back();
+    }
 }

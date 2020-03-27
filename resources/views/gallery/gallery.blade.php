@@ -13,6 +13,7 @@
                         <tr class="table-info">
                             <th>Name of the gallery</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +25,7 @@
                                     </span>
                                 </td>
                                 <td><a href="{{url('gallery/view/' . $gallery->id)}}">view</a></td>
+                                <td><a href="{{url('gallery/delete/' . $gallery->id)}}">delete</a></td>
                             </tr>
                         @endforeach
                     </tbody>
