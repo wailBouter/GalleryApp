@@ -38,5 +38,29 @@
     <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
     <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <script>
+        Dropzone.options.addImages = {
+            maxFilesize: 2,
+            acceptedFiles: 'image/*',
+            success: function(file, response) {
+                if (file.status == 'success') {
+                    handleDropzoneFileUpload.handleSuccess(response);
+                }else {
+                    handleDropzoneFileUpload.handleError(response);
+                }
+            }
+        };
+        var handleDropzoneFileUpload = {
+            handleError: function(response) {
+                console.log(response);
+            },
+            handleSuccess: function(response) {
+                var baseUrl = 'http://127.0.0.1:8000';
+                var imageList = $('#gallery-images ul');
+                var imgSrc = baseUrl + '/' + response.file_path;
+                $(imageList).append('<li><a href="' + imgSrc + '"><img src="' + imgSrc + '"></a></li>"');
+            }
+        }
+    </script>
 </body>
 </html>

@@ -33,7 +33,7 @@
                 <ul>
                     @foreach ($gallery->images as $image)
                     <li>
-                        <a href="{{ url($image->file_path)}}" target="_blank">
+                        <a href="#" data-lightbox="myGallery">
                             <img src="{{ url($image->file_path)}}" alt="img">
                         </a>
                     </li>
