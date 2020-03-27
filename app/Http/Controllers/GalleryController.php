@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class GalleryController extends Controller
@@ -52,6 +53,28 @@ class GalleryController extends Controller
     
     public function doImageUpload(Request $request)
     {
-        # code...
+        //get the file from the post request
+
+        $file = $request->file('file');
+
+        //set the file name and size
+
+        $filename = uniqid() . $file->getClientOriginalName();
+        $size = File::size($file);
+
+        //move the file to the correct location
+
+        $file->move('gallery/images', $filename);
+
+        //save the image details into the database
+        $gallery = Gallery::find($request->input('gallery_id'));
+        $image = $gallery->images()->create([
+            'gallery_id' => $request->input('gallery_id'),
+            'filename' => $filename,
+            'file_size' => $size,
+            'file_mime' => $file->getClientMimeType(),
+            'file_path' => 'gallery/images/' .  $filename,
+            'created_by' => Auth::user()->id
+            ]);
     }
 }
